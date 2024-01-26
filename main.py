@@ -2,9 +2,39 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+@app.route("/cinepolis")
+def cine():
+    return render_template("cinepolis.html")
+
+@app.route("/procesar", methods=["GET", "POST"])
+def procesar():
+    if request.method=="POST":
+        nom = request.form.get("nombre")
+        canCom = request.form.get("cantidadCompradores")
+        
+        Tar = request.form.get("pagoRadio")
+        canBol = request.form.get("cantidadBoletos")
+
+        if float(canCom) == 0:
+            return "No se puede realizar la operación. La cantidad de compradores es 0."
+
+        if float(canBol) / float(canCom) > 7: 
+            return "No se pueden comprar {} boletos, el máximo por persona es 7".format(str(canBol))
+        else:
+            if float(canBol) > 5:
+                canPag = float(canBol) * 12 * 0.85
+            elif float(canBol) > 2:
+                canPag = float((float(canBol) * 12)) * 0.90
+            else:
+                canPag = (float(canBol) * 12)
+        if Tar == "si":
+            canPag = float(canPag) * 0.90
+    return render_template("cinepolis.html", canPag=canPag, nom=nom)
+         
+
+
+
 @app.route("/")
-@app.route("/default")
-@app.route("/formulario1")
 def formulario():
     return render_template("formulario1.html")
 
@@ -17,13 +47,13 @@ def resultado():
         selected_operation = request.form.get("operacion")
 
         if selected_operation == "suma":
-            result = int(num1) + int(num2)
+            result = float(num1) + float(num2)
         elif selected_operation == "resta":
-            result = int(num1) - int(num2)
+            result = float(num1) - float(num2)
         elif selected_operation == "multiplicacion":
-            result = int(num1) * int(num2)
+            result = float(num1) * float(num2)
         elif selected_operation == "division":
-            result = int(num1)/int(num2)
+            result = float(num1)/float(num2)
         return "<h1>El resultado es: {}</h1>".format(str(result))
 
 if __name__=="__main__":

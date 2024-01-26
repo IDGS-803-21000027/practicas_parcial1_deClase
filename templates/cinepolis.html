@@ -10,7 +10,7 @@
     <label for="cantidadCompradores">Cantidad de Compradores:</label>
     <input type="number" id="cantidadCompradores" name="cantidadCompradores" required><br>
 
-    <label>Pago con Radio Button:</label>
+    <label>Tarjeta Cineco:</label>
     <label for="si">Sí</label>
     <input type="radio" id="si" name="pagoRadio" value="si" required>
     <label for="no">No</label>
@@ -19,9 +19,11 @@
     <label for="cantidadBoletos">Cantidad de Boletos:</label>
     <input type="number" id="cantidadBoletos" name="cantidadBoletos" required><br>
 
-    <label for="cantidadPagar">Cantidad a Pagar:</label>
-    <input type="text" id="cantidadPagar" name="cantidadPagar" readonly><br>
+    <label for="cantidadPagar">{{nom}} Tu cantidad a Pagar es:</label>
+    <input type="text" id="cantidadPagar" name="cantidadPagar" readonly value="{{ canPag }}"><br>
 
     <button type="submit" name="accion" value="procesar">Procesar</button>
-    <button type="submit" name="accion" value="salir">Salir</button>
+    <button type="button" name="accion" value="salir">Salir</button>
 </form>
+
+{%endblock%}
