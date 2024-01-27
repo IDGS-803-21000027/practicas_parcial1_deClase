@@ -4,44 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="../static/bootstrap-5.3.2-dist/css/bootstrap.min.css">
     <style>
-        body{
-            padding-top: 60px;}
-        .tr-head{background: #dff0d8;}
+        body {
+            /* Set the background image */
+            background-image: url('../static/cineIma.png');
+            /* Set background size to cover the whole screen */
+            background-size: cover;
+            /* Center the background image */
+            background-position: center;
+            /* Fixed background to prevent scrolling */
+            background-attachment: fixed;
+        }
+
+        .custom-background {
+            /* Set the background color */
+            background-color: #f0f0f0; /* Replace with your desired color */
+            /* Add padding to the background */
+            padding: 20px;
+        }
     </style>
-    <link href="../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- <link href="../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 </head>
-<body>
-    <div class="navbar navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="">
-                    IDGS-803
-                </a>
-                <ul class="nav">
-                    <li class="active">
-                        <a href="">
-                            <i class="icon-user icon-white"></i>
-                            Inicio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="icon-user icon-white"></i>
-                            Usuarios
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="icon-user icon-white"></i>
-                            Alumnos
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<body>      
+      <!-- As a heading -->
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Cinepolis</span>
         </div>
-    </div>
+    </nav>
     <div class="container">
 
             
@@ -49,8 +41,8 @@
 
             {%endblock%}
 
-    </body>
-    </html>
-
-</div>
+    <script src="../static/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+</body>
+</html>
 

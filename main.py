@@ -9,13 +9,13 @@ def cine():
 @app.route("/procesar", methods=["GET", "POST"])
 def procesar():
     if request.method=="POST":
-        nom = request.form.get("nombre")
-        canCom = request.form.get("cantidadCompradores")
+        nom = str(request.form.get("nombre"))
+        canCom = int(request.form.get("cantidadCompradores"))
         
-        Tar = request.form.get("pagoRadio")
-        canBol = request.form.get("cantidadBoletos")
+        Tar = str(request.form.get("pagoRadio"))
+        canBol = int(request.form.get("cantidadBoletos"))
 
-        if float(canCom) == 0:
+        if canCom == 0:
             return "No se puede realizar la operación. La cantidad de compradores es 0."
 
         if float(canBol) / float(canCom) > 7: 
