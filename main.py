@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-
+import forms
+import math
 app = Flask(__name__)
 
 @app.route("/cinepolis")
@@ -55,6 +56,20 @@ def resultado():
         elif selected_operation == "division":
             result = float(num1)/float(num2)
         return "<h1>El resultado es: {}</h1>".format(str(result))
+    
+@app.route("/distancia", methods=["GET","POST"])
+def distancia():
+    dis=""
+    dis_form = forms.distaciaForm(request.form)
+    if request.method=="POST":
+        x1=dis_form.x1.data
+        x2=dis_form.x2.data
+        y1=dis_form.y1.data
+        y2=dis_form.y2.data
+        dis = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+
+    return render_template("distancia.html", form=dis_form,dis=dis)
+
 
 if __name__=="__main__":
     app.run(debug=True)
