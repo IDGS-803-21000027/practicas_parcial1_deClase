@@ -1,0 +1,38 @@
+
+{%extends 'resLayout.html' %}
+
+{%block content %}
+{% import "_macros.html" as macros %}
+
+    <h1>Calculo de resistencias</h1>
+    <form action="" method="post">
+    {{macros.render_field(form.c1)}}
+    {{macros.render_field(form.c2)}}
+    {{macros.render_field(form.c3)}}
+    {{macros.render_field(form.c4)}}
+    <input type="submit" name="btn1" value="registrar">
+    </form>
+
+
+    <table>
+        <tr>
+            <th>color1</th>
+            <th>color2</th>
+            <th>color3</th>
+            <th>tolerancia</th>
+            <th>valor</th>
+            <th>valor máximo</th>
+            <th>valor mínimo</th>
+        </tr>
+        <tr>
+            <td style="background-color: {{b1}};">{{c1}}</td>
+            <td style="background-color: {{b2}};">{{c2}}</td>
+            <td style="background-color: {{b3}};">{{c3}}</td>
+            <td style="background-color: {{temp}}">{{c4}}</td>
+            <td>{{res}}</td>
+            <td>{{max}}</td>
+            <td>{{min}}</td>
+        </tr>
+    </table>
+
+{%endblock%}
