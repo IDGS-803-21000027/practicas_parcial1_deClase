@@ -20,3 +20,8 @@ class resForm(Form):
     c2 = SelectField('c2', choices=CHOICES_SELECT1)
     c3 = SelectField('c3', choices=CHOICES_SELECT2)
     c4 = RadioField('c4', choices=CHOICES_RADIO)
+
+class diccionario():
+    ingles = IntegerField('ingles')
+    espanol = IntegerField('espanol')
+    radio = [('0.05', 'Ingles'), ('0.1', 'Espanol')]
