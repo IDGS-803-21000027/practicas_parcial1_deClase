@@ -1,5 +1,6 @@
 from wtforms import Form
-from wtforms import IntegerField,FloatField,SelectField,RadioField
+from wtforms import IntegerField,FloatField,SelectField,RadioField, StringField
+from wtforms import validators
 
 class distaciaForm(Form):
     x1 = IntegerField('x1')
@@ -21,7 +22,21 @@ class resForm(Form):
     c3 = SelectField('c3', choices=CHOICES_SELECT2)
     c4 = RadioField('c4', choices=CHOICES_RADIO)
 
-class diccionario():
-    ingles = IntegerField('ingles')
-    espanol = IntegerField('espanol')
-    radio = [('0.05', 'Ingles'), ('0.1', 'Espanol')]
+class diccionarioForm(Form):
+    ingles = StringField('Ingles', [
+        validators.DataRequired(message='El campo se necesita'),
+        validators.length(min=2, max=10,message='Ingresa una palabra entre 2 y 10 caracteres')
+    ])
+    espanol = StringField('Espanol', [
+        validators.DataRequired(message='El campo se necesita'),
+        validators.length(min=2, max=10,message='Ingresa una palabra entre 2 y 10 caracteres')
+    ])
+
+class traduccionForm(Form):
+    traduccion = StringField('Buscar', [
+        validators.DataRequired(message='El campo se necesita'),
+        validators.length(min=2, max=10,message='Ingresa una palabra entre 2 y 10 caracteres')
+    ])
+
+    elecciones = [('1', 'Ingles'), ('0', 'Espanol')]
+    radio = RadioField('Lenguaje', choices=elecciones)

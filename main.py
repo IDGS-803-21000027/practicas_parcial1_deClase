@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import forms
 import math
+from io import open
+
 
 app = Flask(__name__)
 
@@ -110,6 +112,56 @@ def res():
 
     return render_template("resistencias.html", form=res_form,res=res,min=min,max=max,c1=c1,c2=c2,c3=c3,c4=c4,b1=b1,b2=b2,b3=b3,temp=temp)
 
+@app.route("/diccionario", methods=["GET","POST"])
+def diccionario():
+
+    dic = {}
+    tra=""
+    eng=""
+    esp=""
+    tra_form = forms.traduccionForm(request.form)
+    len_form = forms.diccionarioForm(request.form)
+
+    dic = {}
+           # Leer el archivo y cargar las palabras en el diccionario
+    with open("diccionario.txt", "r") as file:
+        for line in file:
+            # Dividir la línea en la palabra y su traducción
+            palabra_ingles, palabra_espanol = line.strip().split(" : ")
+            # Almacenar en el diccionario
+            dic[palabra_ingles] = palabra_espanol
+
+    if request.method=="POST" and len_form.validate() or request.method=="POST" and tra_form.validate():
+  
+        if len_form.ingles.data and len_form.espanol.data:
+            eng = len_form.ingles.data
+            esp = len_form.espanol.data
+            # Escribir en el archivo
+            with open("diccionario.txt", "a") as file:
+                file.write(f"{eng} : {esp}\n")
+
+        if tra_form.traduccion.data:
+            valor = tra_form.traduccion.data
+            r = tra_form.radio.data
+
+            if valor in dic.keys():
+                if r == "0":
+                    tra = dic.get(valor,valor)
+                elif r == "1":
+                    tra = valor
+
+            elif valor in dic.values():
+                if r == "0":
+                    tra = valor
+                elif r == "1":
+                    for key, val in dic.items():
+                        if val == valor:
+                            tra = key
+            else:
+                tra = 'Inexistente'
+    
+
+    return render_template("lenguaje.html", form=len_form, form2=tra_form, dic=dic, tra=tra)
 
 if __name__=="__main__":
     app.run(debug=True)
